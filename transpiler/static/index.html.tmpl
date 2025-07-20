@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    {{if .IncludePrism}}
+    <link rel="stylesheet" href="prism.css" />
+    <script defer src="prism.js"></script>
+    {{end}}
+
+    <link rel="stylesheet" href="styles.css?v={TIMESTAMP}" />
+    <script src="router.js"></script>
+
+    <title>{{.SiteName}}</title>
+  </head>
+  <body>
+    <header>
+      <hgroup>
+        {{if .ShowTitle}} <h1 id="header__title">{{.Title}}</h1>{{end}}
+        {{if .ShowSubtitle}} <h3 id="header__subtitle">{{.Subtitle}}</h3>{{end}}
+        <a href="/" data-nav="true">Home</a>
+      </hgroup>
+    </header>
+    <hr />
+    <main id="spa-content"></main>
+  </body>
+  {{if .DevMode}}<script src="livereload.js"></script>{{end}}
+</html>
