@@ -3,8 +3,7 @@ package cmd
 import (
 	"fmt"
 	"os"
-	"path/filepath"
-	"spagen/utils"
+	"spagen/transpiler"
 )
 
 var initFiles = []string{
@@ -19,26 +18,32 @@ var initPosts = []string{
 }
 
 func Init() error {
-	exePath, err := os.Executable()
-	if err != nil {
-		return fmt.Errorf("could not determine executable path: %w", err)
-	}
-	baseDir := filepath.Dir(exePath)
-	staticDir := filepath.Join(baseDir, "transpiler", "static")
 
 	for _, file := range initFiles {
-		if err := utils.CopyFile(filepath.Join(staticDir, file), "./"+file); err != nil {
-			return fmt.Errorf("failed to copy %s: %w", file, err)
+		fileBytes, err := transpiler.StaticFiles.ReadFile("static/" + file)
+		if err != nil {
+			return fmt.Errorf("failed to read %s: %w", file, err)
+		}
+		if err := os.WriteFile("./"+file, fileBytes, 0644); err != nil {
+			return fmt.Errorf("failed to write %s: %w", file, err)
 		}
 
-		fmt.Println("~> Created", file) // Green
+		fmt.Println("~> Created", file)
+	}
+
+	if err := os.MkdirAll("./posts", 0755); err != nil {
+		return fmt.Errorf("failed to create posts directory: %w", err)
 	}
 
 	for _, post := range initPosts {
-		if err := utils.CopyFile(filepath.Join(staticDir, post), "./posts/"+post); err != nil {
-			return fmt.Errorf("failed to copy %s: %w", post, err)
+		fileBytes, err := transpiler.StaticFiles.ReadFile("static/" + post)
+		if err != nil {
+			return fmt.Errorf("failed to read %s: %w", post, err)
 		}
-		fmt.Println("~> Created", post, "in ./posts/") // Green
+		if err := os.WriteFile("./posts/"+post, fileBytes, 0644); err != nil {
+			return fmt.Errorf("failed to write %s: %w", post, err)
+		}
+		fmt.Println("~> Created", post, "in ./posts/")
 	}
 
 	fmt.Println("==============")

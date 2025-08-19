@@ -14,7 +14,7 @@ import (
 )
 
 //go:embed static/*
-var staticFiles embed.FS
+var StaticFiles embed.FS
 
 var staticFileList = []string{
 	"router.js",
@@ -196,7 +196,7 @@ func appendToHomeList(filename string, linkText string, list *html.Node) {
 }
 
 func copyToBuild(embedPath string, buildDir string, outName string) error {
-	data, err := staticFiles.ReadFile(embedPath)
+	data, err := StaticFiles.ReadFile(embedPath)
 	if err != nil {
 		return fmt.Errorf("error reading embedded file %s: %v", embedPath, err)
 	}
