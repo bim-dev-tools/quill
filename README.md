@@ -26,7 +26,7 @@ Quill is a fast, modern static site generator and SPA blog engine written in Go.
 Clone the repository and build the binary:
 
 ```sh
-git clone https://github.com/sam-peach/quill.git
+git clone https://github.com/bim-dev-tools/quill.git
 cd quill
 go build -o quill
 ```
