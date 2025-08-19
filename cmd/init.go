@@ -3,7 +3,7 @@ package cmd
 import (
 	"fmt"
 	"os"
-	"spagen/transpiler"
+	"quill/transpiler"
 )
 
 var initFiles = []string{

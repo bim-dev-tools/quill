@@ -2,10 +2,10 @@ package cmd
 
 import (
 	"fmt"
-	"spagen/config"
-	"spagen/server"
-	"spagen/transpiler"
-	"spagen/utils"
+	"quill/config"
+	"quill/server"
+	"quill/transpiler"
+	"quill/utils"
 )
 
 func Server() error {

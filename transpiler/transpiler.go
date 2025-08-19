@@ -6,8 +6,8 @@ import (
 	"html/template"
 	"os"
 	"path/filepath"
-	"spagen/config"
-	"spagen/page"
+	"quill/config"
+	"quill/page"
 	"strings"
 
 	"golang.org/x/net/html"

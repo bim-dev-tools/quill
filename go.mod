@@ -1,4 +1,4 @@
-module spagen
+module quill
 
 go 1.24.0
 

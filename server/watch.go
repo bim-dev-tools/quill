@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"log"
 	"path/filepath"
-	"spagen/config"
+	"quill/config"
 	"time"
 
 	"github.com/fsnotify/fsnotify"

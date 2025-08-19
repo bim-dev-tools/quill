@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
-	"spagen/cmd"
+	"quill/cmd"
 )
 
 func main() {

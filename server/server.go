@@ -3,7 +3,7 @@ package server
 import (
 	"fmt"
 	"net/http"
-	"spagen/config"
+	"quill/config"
 	"sync"
 
 	"github.com/gorilla/websocket"

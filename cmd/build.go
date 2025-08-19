@@ -1,8 +1,8 @@
 package cmd
 
 import (
-	"spagen/config"
-	"spagen/transpiler"
+	"quill/config"
+	"quill/transpiler"
 )
 
 func Build() error {
