@@ -104,7 +104,11 @@ func buildPostList(buildDir string) *html.Node {
 		}
 
 		outName := strings.TrimSuffix(filename, ".md") + ".html"
-		postFile, err := os.Create(filepath.Join("..", buildDir, "posts", outName))
+		postPath := filepath.Join(buildDir, "posts", outName)
+		if err := os.MkdirAll(filepath.Dir(postPath), os.ModePerm); err != nil {
+			panic(err)
+		}
+		postFile, err := os.Create(postPath)
 		if err != nil {
 			panic(err)
 		}

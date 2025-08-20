@@ -1,3 +1,2 @@
-/build
-/posts
-quill
+build/
+.DS_Store
