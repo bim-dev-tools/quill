@@ -1,3 +1,5 @@
+[![CI](https://github.com/bim-dev-tools/quill/actions/workflows/ci.yaml/badge.svg)](https://github.com/bim-dev-tools/quill/actions/workflows/ci.yaml/badge.svg)
+
 # Quill
 
 <img src="quill-logo-cropped.png" alt="Quill Logo" width="200" />
