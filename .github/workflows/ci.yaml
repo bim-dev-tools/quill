@@ -1,0 +1,28 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.24"
+          check-latest: true
+
+      - name: Vet & Lint
+        run: |
+          go vet ./...
+          # optional: golangci-lint
+          # curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin
+          # golangci-lint run
+
+      - name: Test (race + coverage)
+        run: |
+          go test -race -coverprofile=cover.out ./...
+          go tool cover -func=cover.out
