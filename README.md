@@ -18,12 +18,23 @@ Quill is a fast, modern static site generator and SPA blog engine written in Go.
 
 ## Getting Started
 
+### Installation
+
+## From Brew
+
+Run the following:
+
+```sh
+brew tap bim-dev-tools/tap
+brew install quill
+```
+
+## From Source
+
 ### Prerequisites
 
 - Go 1.18+
 - Node.js (optional, for advanced JS/CSS customization)
-
-### Installation
 
 Clone the repository and build the binary:
 
@@ -89,6 +100,24 @@ server:
 - `init` — Scaffold a new site in the current directory.
 - `server` — Start the live-reload development server.
 - `build` — Build the static site for deployment.
+
+## Design Philosophies
+
+### Don’t scale
+
+No bells, no whistles. Minimal dependencies. Generate small, focused blogs that do one thing well.
+
+### Sensible defaults, flexible when needed
+
+Everything is configurable, but nothing has to be. Start simple, customize only if you want.
+
+### Posts aren’t programs
+
+Content should stay close to raw text. The tooling gets out of the way so you can focus on words, not code.
+
+### Just write
+
+The workflow should encourage writing, not configuring. Remove friction, remove distractions.
 
 ## Contributing
 
