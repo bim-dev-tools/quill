@@ -80,7 +80,6 @@ func buildPostList(buildDir string) *html.Node {
 	}
 
 	os.MkdirAll(filepath.Join(buildDir, "posts"), os.ModePerm)
-	os.Chdir("./posts")
 	for i := len(files) - 1; i >= 0; i-- {
 		file := files[i]
 		filename := file.Name()
@@ -88,7 +87,7 @@ func buildPostList(buildDir string) *html.Node {
 			continue
 		}
 
-		mdBytes, err := os.ReadFile(filename)
+		mdBytes, err := os.ReadFile(filepath.Join("posts", filename))
 		if err != nil {
 			panic(err)
 		}
@@ -118,8 +117,6 @@ func buildPostList(buildDir string) *html.Node {
 
 		appendToHomeList(outName, title, &list)
 	}
-
-	os.Chdir("..")
 
 	body := html.Node{
 		Type: html.ElementNode,
