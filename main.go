@@ -6,26 +6,38 @@ import (
 	"quill/cmd"
 )
 
+var version = "dev" // Replace with actual version during build
+
 func main() {
-	switch os.Args[1] {
-	case "init":
+	opts := ParseOptions()
+
+	if opts.ShowVersion {
+		fmt.Printf("Quill version %s\n", version)
+		os.Exit(0)
+	}
+
+	parsedCmd, err := cmd.GetCommand(os.Args[1])
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+
+	switch parsedCmd {
+	case cmd.InitCmd:
 		if err := cmd.Init(); err != nil {
 			fmt.Println("Error initializing:", err)
 			os.Exit(1)
 		}
-	case "server":
+	case cmd.ServerCmd:
 		if err := cmd.Server(); err != nil {
 			fmt.Println("Error starting server:", err)
 			os.Exit(1)
 		}
-	case "build":
+	case cmd.BuildCmd:
 		if err := cmd.Build(); err != nil {
 			fmt.Println("Error building:", err)
 			os.Exit(1)
 		}
-	default:
-		fmt.Printf("Unknown command: %s\n", os.Args[1])
-		os.Exit(1)
 	}
 
 	os.Exit(0)
