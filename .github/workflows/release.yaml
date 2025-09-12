@@ -48,10 +48,14 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
       - name: Download all build artifacts
         uses: actions/download-artifact@v4
         with:
           path: dist
+      - name: Copy install.sh to dist
+        run: cp install.sh dist/
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:

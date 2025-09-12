@@ -20,21 +20,17 @@ Quill is a fast, modern static site generator and SPA blog engine written in Go.
 
 ### Installation
 
-## From Brew
+#### Recommended: One-Line Install
 
-Run the following:
+You can install the latest Quill release with a single command:
 
 ```sh
-brew tap bim-dev-tools/tap
-brew install quill
+curl -fsSL https://github.com/bim-dev-tools/quill/releases/latest/download/install.sh | bash
 ```
 
-## From Source
+This script will automatically detect your OS and architecture, download the latest release, and install it to `/usr/local/bin/quill` (or the appropriate location).
 
-### Prerequisites
-
-- Go 1.18+
-- Node.js (optional, for advanced JS/CSS customization)
+#### Manual Install (Advanced)
 
 Clone the repository and build the binary:
 
@@ -49,7 +45,7 @@ go build -o quill
 Run the following command in your target directory:
 
 ```sh
-./quill init
+quill init
 ```
 
 This will create:
@@ -64,7 +60,7 @@ This will create:
 Start the live-reload development server:
 
 ```sh
-./quill server
+quill server
 ```
 
 - Visit `http://localhost:8080` (default port) in your browser.
@@ -75,7 +71,7 @@ Start the live-reload development server:
 Generate the static site for deployment:
 
 ```sh
-./quill build
+quill build
 ```
 
 Output will be in the `build/` directory (default).
