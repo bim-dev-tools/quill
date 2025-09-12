@@ -1,9 +1,13 @@
 name: Release
 
 on:
-  push:
-    tags:
-      - "v*"
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Tag to release (e.g. v1.2.3)"
+        required: true
+permissions:
+  contents: write
 
 jobs:
   build:
@@ -20,17 +24,24 @@ jobs:
         uses: actions/setup-go@v5
         with:
           go-version: "1.24"
+      - name: Get latest tag (manual trigger)
+        id: get_tag
+        run: |
+          git fetch --tags
+          echo "tag=$(git describe --tags $(git rev-list --tags --max-count=1))" >> $GITHUB_OUTPUT
       - name: Build binary
         run: |
           mkdir -p dist
           EXT=""
           if [ "${{ matrix.goos }}" == "windows" ]; then EXT=".exe"; fi
-          GOOS=${{ matrix.goos }} GOARCH=${{ matrix.goarch }} go build -o dist/quill_${{ matrix.goos }}_${{ matrix.goarch }}${EXT} ./main.go
+          VERSION="${{ github.event.inputs.tag }}"
+          OUT="dist/quill_${VERSION}_${{ matrix.goos }}_${{ matrix.goarch }}${EXT}"
+          GOOS=${{ matrix.goos }} GOARCH=${{ matrix.goarch }} go build -ldflags "-X 'main.version=${VERSION}'" -o "$OUT" .
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: quill_${{ matrix.goos }}_${{ matrix.goarch }}
-          path: dist/quill_${{ matrix.goos }}_${{ matrix.goarch }}*
+          name: quill_${{ github.event.inputs.tag }}_${{ matrix.goos }}_${{ matrix.goarch }}
+          path: dist/quill_${{ github.event.inputs.tag }}_${{ matrix.goos }}_${{ matrix.goarch }}*
 
   release:
     name: Create GitHub Release
@@ -44,4 +55,5 @@ jobs:
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
+          tag_name: ${{ github.event.inputs.tag }}
           files: dist/**/*
