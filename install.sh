@@ -27,6 +27,7 @@ case "$ARCH" in
 esac
 
 BINARY="quill_${LATEST}_${OS}_${ARCH}"
+echo "Creating temporary directory..."
 TMPDIR=$(mktemp -d)
 cd "$TMPDIR"
 
