@@ -24,6 +24,7 @@ const renderContent = async (path, push = true) => {
     const url = pageName ? `/#/${pageName}` : "/";
     push ? history.pushState(url, "", url) : history.replaceState(url, "", url); // Update browser history
 
+    document.querySelectorAll("pre").forEach(pre => pre.classList.add("line-numbers"));
     Prism.highlightAll();
   }
 };
