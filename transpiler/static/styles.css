@@ -102,3 +102,24 @@ a:hover {
     line-height: 1.85rem;
   }
 }
+
+/* Inline code (not inside a fenced block) */
+:not(pre) > code {
+  background: #dde;
+  border-radius: 4px;
+  padding: 0.1em 0.35em;
+  font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
+  font-size: 0.88em;
+  color: #111;
+}
+
+/* Code block container */
+div.code-toolbar,
+pre[class*="language-"] {
+  border-radius: 6px;
+}
+
+/* Toolbar (language label + copy button) */
+div.code-toolbar > .toolbar {
+  opacity: 1;
+}
